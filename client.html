@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://unpkg.com/mqtt@2.17.0/dist/mqtt.js"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<ul id="app">
+  <li v-for="message in messages">
+    {{ message.text }}
+  </li>
+</ul>
+
+<script type="text/javascript">
+
+var example1 = new Vue({
+	el: '#app',
+	data: {
+		messages: []
+	},
+	mounted() {
+		var _this = this
+		var client  = mqtt.connect({host: 'localhost', port: 1884 })
+		client.on('connect', function () {
+			client.subscribe('test_u', function (err) {
+				if (err) {
+					console.log("Error connecting to server")
+				}
+			})
+		})
+		client.on('message', function (topic, message, packet) {
+			_this.messages.push({ text: message.toString()})
+			console.log(message.toString())
+			//client.end()
+		})
+	}
+})
+
+</script>
+</body>
+</html>

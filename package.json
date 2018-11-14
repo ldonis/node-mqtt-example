@@ -1,0 +1,13 @@
+{
+  "name": "node_mqtt_example",
+  "description": "Simple MQTT broker with Mosca and NodeJS",
+  "author": "Luis Donis <ldonis@lesli.tech>",
+  "license": "GPL-3.0",
+  "main": "./server.js",
+  "dependencies": {
+    "mosca": "^2.8.3",
+    "nodemailer": "^4.6.8"
+  },
+  "devDependencies": {},
+  "scripts": {}
+}
